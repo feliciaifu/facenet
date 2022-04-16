@@ -35,6 +35,7 @@ import facenet
 import align.detect_face
 import random
 from time import sleep
+import imageio
 
 def main(args):
     sleep(random.random())
@@ -76,11 +77,13 @@ def main(args):
             for image_path in cls.image_paths:
                 nrof_images_total += 1
                 filename = os.path.splitext(os.path.split(image_path)[1])[0]
+                if filename[0]=='.':
+                    continue
                 output_filename = os.path.join(output_class_dir, filename+'.png')
                 print(image_path)
                 if not os.path.exists(output_filename):
                     try:
-                        img = misc.imread(image_path)
+                        img = imageio.imread(image_path)
                     except (IOError, ValueError, IndexError) as e:
                         errorMessage = '{}: {}'.format(image_path, e)
                         print(errorMessage)
