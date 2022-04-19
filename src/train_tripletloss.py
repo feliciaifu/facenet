@@ -115,6 +115,7 @@ def main(args):
                     image = tf.image.random_flip_left_right(image)
     
                 #pylint: disable=no-member
+      image = tf.to_float(image)
                 image.set_shape((args.image_size, args.image_size, 3))
                 images.append(tf.image.per_image_standardization(image))
             images_and_labels.append([images, label])
