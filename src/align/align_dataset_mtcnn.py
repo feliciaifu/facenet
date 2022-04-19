@@ -125,14 +125,14 @@ def main(args):
                                 bb[2] = np.minimum(det[2]+args.margin/2, img_size[1])
                                 bb[3] = np.minimum(det[3]+args.margin/2, img_size[0])
                                 cropped = img[bb[1]:bb[3],bb[0]:bb[2],:]
-                                scaled = resize(cropped, outpit_shape=(args.image_size, args.image_size))
+                                scaled = resize(cropped, output_shape=(args.image_size, args.image_size))
                                 nrof_successfully_aligned += 1
                                 filename_base, file_extension = os.path.splitext(output_filename)
                                 if args.detect_multiple_faces:
                                     output_filename_n = "{}_{}{}".format(filename_base, i, file_extension)
                                 else:
                                     output_filename_n = "{}{}".format(filename_base, file_extension)
-                                misc.imsave(output_filename_n, scaled)
+                                imageio.imsave(output_filename_n, scaled)
                                 text_file.write('%s %d %d %d %d\n' % (output_filename_n, bb[0], bb[1], bb[2], bb[3]))
                         else:
                             print('Unable to align "%s"' % image_path)
